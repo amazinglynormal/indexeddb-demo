@@ -15,13 +15,72 @@
       <button type="button" class="delete-db-btn">Delete Database</button>
     </header>
 
-    <section class="db-inputs">
-      <h2>Entries</h2>
+    <section class="db-form">
+      <h2>Add to database</h2>
       <form>
-        <input type="text" />
-        <button type="submit">Add</button>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" />
+
+        <label for="job">Job Title</label>
+        <input type="text" id="job" name="job" />
+
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" min="18" />
+
+        <label for="os">Operating System</label>
+        <select id="os" name="os">
+          <option>Linux</option>
+          <option>MacOS</option>
+          <option>Windows</option>
+          <option>Other</option>
+        </select>
+
+        <fieldset>
+          <legend>Which languages do you know?</legend>
+          <div>
+            <input type="checkbox" id="c" name="languages" value="c/c++" />
+            <label for="c">C/C++</label>
+          </div>
+          <div>
+            <input type="checkbox" id="go" name="languages" value="Go" />
+            <label for="go">Go</label>
+          </div>
+          <div>
+            <input type="checkbox" id="java" name="languages" value="Java" />
+            <label for="java">Java</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="js"
+              name="languages"
+              value="Javascript"
+            />
+            <label for="js">Javascript</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="python"
+              name="languages"
+              value="Python"
+            />
+            <label for="python">Python</label>
+          </div>
+          <div>
+            <input type="checkbox" id="ruby" name="languages" value="Ruby" />
+            <label for="ruby">Ruby</label>
+          </div>
+        </fieldset>
+
+        <div>
+          <button type="submit">Add</button>
+        </div>
       </form>
-      <div class="db-entries"></div>
+    </section>
+
+    <section class="db-entries">
+      <h2>Entries</h2>
     </section>
 
     <section class="db-tranactions">
