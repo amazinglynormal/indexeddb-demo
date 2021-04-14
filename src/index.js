@@ -1,37 +1,41 @@
 import "./styles.css";
+const DB_NAME = "indexedDBDemo";
 
 const initializeDBBtn = document.querySelector(".initialize-db-btn");
 const deleteDBBtn = document.querySelector(".delete-db-btn");
 const form = document.querySelector("form");
-
-// const dbExists = false;
-
-const checkForDB = async () => {
-  const dbs = await indexedDB.databases();
-  console.log(dbs);
-};
-
-checkForDB();
-
+let dbExists = false;
 let db;
 
+(async function () {
+  const dbs = await indexedDB.databases();
+  dbs.forEach((db) => {
+    if (db.name === DB_NAME) dbExists = true;
+  });
+})();
+
+if (dbExists) {
+  initializeDBBtn.setAttribute("disabled", "");
+} else {
+  deleteDBBtn.setAttribute("disabled", "");
+}
+
 initializeDBBtn.addEventListener("click", () => {
-  const DBOpenRequest = indexedDB.open("testDB");
-  console.log(DBOpenRequest);
-  console.log("initalize Database");
+  const DBOpenRequest = indexedDB.open(DB_NAME);
+  initializeDBBtn.setAttribute("disabled", "");
+  deleteDBBtn.removeAttribute("disabled");
 
   DBOpenRequest.onsuccess = function () {
     db = DBOpenRequest.result;
-    console.log(db);
-    const transaction = db.transaction("testStore", "readwrite");
-    const store = transaction.objectStore("testStore");
-    const req = store.add({ name: "test", job: "test", age: 30 });
-    console.log(req);
+    dbExists = true;
   };
 });
 
 deleteDBBtn.addEventListener("click", () => {
-  indexedDB.deleteDatabase("testDB");
+  indexedDB.deleteDatabase(DB_NAME);
+  dbExists = false;
+  initializeDBBtn.removeAttribute("disabled");
+  deleteDBBtn.setAttribute("disabled", "");
 });
 
 form.addEventListener("submit", (event) => {
@@ -40,6 +44,5 @@ form.addEventListener("submit", (event) => {
 });
 
 form.addEventListener("formdata", (event) => {
-  console.log(event.formData.getAll());
-  for (const val of event.formData.entries()) console.log(val);
+  for (const val of event.formData.keys()) console.log(val);
 });
