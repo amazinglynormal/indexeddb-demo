@@ -17,6 +17,7 @@ module.exports = {
   mode: "development",
   entry: "./src/index.js",
   plugins,
+  devtool: devMode ? "eval" : null,
   devServer: {
     open: true,
     contentBase: path.join(__dirname, "dist"),
