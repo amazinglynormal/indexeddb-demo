@@ -3,3 +3,45 @@
   margin: 0;
   padding: 0;
 }
+
+.entry-card {
+  border: 1px black solid;
+  border-radius: 3px;
+  padding: 1rem;
+}
+
+.entry-card dl div {
+  margin: 0.5rem 0;
+}
+
+.entry-card dl dt,
+.entry-card dl dd {
+  display: inline;
+}
+
+.entry-card dl dt {
+  color: rgb(104, 99, 99);
+  font-size: 0.9rem;
+}
+
+dt::after {
+  content: ": ";
+}
+
+.entry-card dl dd {
+  font-size: 1.2rem;
+}
+
+.entry-card .delete-entry-btn {
+  background-color: red;
+  color: white;
+  border: transparent;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.entry-card .delete-entry-btn:hover {
+  background-color: darkred;
+  cursor: pointer;
+}
