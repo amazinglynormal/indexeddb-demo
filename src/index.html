@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IndexedDB Project</title>
+    <title>IndexedDB Demo Project</title>
   </head>
   <body>
     <header class="db-btns">
@@ -29,10 +29,11 @@
 
         <label for="os">Operating System</label>
         <select id="os" name="os">
-          <option>Linux</option>
-          <option>MacOS</option>
-          <option>Windows</option>
-          <option>Other</option>
+          <option value="">--Please choose an option--</option>
+          <option value="Linux">Linux</option>
+          <option value="MacOS">MacOS</option>
+          <option value="Windows">Windows</option>
+          <option value="Other">Other</option>
         </select>
 
         <fieldset>
@@ -83,8 +84,9 @@
       <h2>Entries</h2>
     </section>
 
-    <section class="db-tranactions">
+    <section class="db-transactions">
       <h2>Transactions</h2>
+      <ul></ul>
     </section>
   </body>
 </html>
