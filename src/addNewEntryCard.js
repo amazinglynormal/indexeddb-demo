@@ -1,5 +1,9 @@
 import { removeDataFromDB } from "./database";
 
+const capitalize = (word) => {
+  return word[0].toUpperCase() + word.slice(1);
+};
+
 export default function addNewEntryCard(data, parentNode, id) {
   const article = document.createElement("article");
   article.setAttribute("id", id);
@@ -13,7 +17,7 @@ export default function addNewEntryCard(data, parentNode, id) {
     const dt = document.createElement("dt");
     const dd = document.createElement("dd");
 
-    const keyName = document.createTextNode(key);
+    const keyName = document.createTextNode(capitalize(key));
     dt.appendChild(keyName);
 
     const isArray = Array.isArray(data[key]);

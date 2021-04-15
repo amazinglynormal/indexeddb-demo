@@ -2,12 +2,112 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: Helvetica, Arial, Sans-Serif;
 }
 
-.entry-card {
-  border: 1px black solid;
+.db-btn,
+.db-form,
+.grid-container {
+  max-width: 1024px;
+  width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-weight: 700;
+  border: transparent;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.db-form form,
+.entry-card,
+fieldset,
+select,
+input[type="text"],
+input[type="number"] {
+  border: 1px solid rgb(199, 199, 199);
+}
+
+/* header section */
+.db-btn {
+  display: flex;
+  align-items: center;
+}
+
+.db-btn h1 {
+  margin-right: 2rem;
+}
+
+.db-btn .delete-db-btn {
+  background-color: red;
+  color: white;
+}
+
+.db-btn .delete-db-btn:hover {
+  background-color: darkred;
+  cursor: pointer;
+}
+
+.db-btn .delete-db-btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+/* form section */
+
+.db-form form {
   border-radius: 3px;
   padding: 1rem;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.db-form form div {
+  margin: 1rem 0;
+}
+
+.db-form form fieldset div {
+  margin: 0.5rem 0;
+}
+
+.db-form button {
+  background-color: rgb(39, 212, 97);
+}
+
+.db-form button:hover {
+  background-color: rgb(34, 187, 85);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  height: 2rem;
+  border-radius: 3px;
+  background-color: transparent;
+  margin-left: 1rem;
+  padding: 0.3rem;
+}
+
+input[type="checkbox"] {
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+
+fieldset {
+  border-radius: 3px;
+}
+
+/* entry card */
+.entry-card {
+  border-radius: 3px;
+  padding: 1rem;
+  max-width: 75%;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
 }
 
 .entry-card dl div {
@@ -35,10 +135,6 @@ dt::after {
 .entry-card .delete-entry-btn {
   background-color: red;
   color: white;
-  border: transparent;
-  padding: 0.5rem 1rem;
-  border-radius: 3px;
-  font-weight: 700;
 }
 
 .entry-card .delete-entry-btn:hover {
@@ -52,4 +148,18 @@ dt::after {
 
 .error {
   color: red;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 1rem;
+}
+
+.db-entries {
+  grid-column-start: span 2;
+}
+
+.db-transactions {
+  grid-column-start: 3;
 }
