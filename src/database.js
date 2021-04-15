@@ -1,4 +1,4 @@
-import addEntryCardToDom from "./addEntryCardToDom";
+import addNewEntryCard from "./addNewEntryCard";
 
 const entriesSection = document.getElementsByClassName("db-entries")[0];
 const STORE_NAME = "userStore";
@@ -61,7 +61,7 @@ export const fetchDataFromDB = () => {
     fetch.onsuccess = () => {
       data = fetch.result;
       for (const entry in data) {
-        addEntryCardToDom(data[entry], entriesSection, entry);
+        addNewEntryCard(data[entry], entriesSection, entry);
       }
     };
   };

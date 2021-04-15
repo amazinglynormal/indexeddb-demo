@@ -1,6 +1,6 @@
 import { removeDataFromDB } from "./database";
 
-export default function addEntryCardToDom(data, parentNode, id) {
+export default function addNewEntryCard(data, parentNode, id) {
   const article = document.createElement("article");
   article.setAttribute("id", id);
   article.setAttribute("class", "entry-card");
