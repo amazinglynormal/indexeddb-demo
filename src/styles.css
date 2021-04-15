@@ -45,3 +45,11 @@ dt::after {
   background-color: darkred;
   cursor: pointer;
 }
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
