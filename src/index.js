@@ -4,7 +4,6 @@ import makeId from "./makeId";
 import "./styles.css";
 
 // selectors
-const initializeDBBtn = document.querySelector(".initialize-db-btn");
 const deleteDBBtn = document.querySelector(".delete-db-btn");
 const form = document.querySelector("form");
 const entriesSection = document.getElementsByClassName("db-entries")[0];
@@ -12,25 +11,20 @@ const entriesSection = document.getElementsByClassName("db-entries")[0];
 // check for existing entries in database
 (async function () {
   const dbs = await indexedDB.databases();
-  dbs.forEach((db) => {
-    if (db.name === DB_NAME) {
-      initializeDBBtn.setAttribute("disabled", "");
-      fetchDataFromDB();
-    } else {
-      deleteDBBtn.setAttribute("disabled", "");
-    }
-  });
+  if (dbs.length > 0) {
+    dbs.forEach((db) => {
+      if (db.name === DB_NAME) {
+        fetchDataFromDB();
+      }
+    });
+  } else {
+    deleteDBBtn.setAttribute("disabled", "");
+  }
 })();
-
-// initializeDBBtn.addEventListener("click", async () => {
-//   initializeDBBtn.setAttribute("disabled", "");
-//   deleteDBBtn.removeAttribute("disabled");
-// });
 
 // add listeners
 deleteDBBtn.addEventListener("click", () => {
   indexedDB.deleteDatabase(DB_NAME);
-  initializeDBBtn.removeAttribute("disabled");
   deleteDBBtn.setAttribute("disabled", "");
 });
 
@@ -50,4 +44,7 @@ form.addEventListener("formdata", (event) => {
   const id = makeId();
   addDataToDB(data, id);
   addNewEntryCard(data, entriesSection, id);
+  if (deleteDBBtn.hasAttribute("disabled")) {
+    deleteDBBtn.removeAttribute("disabled");
+  }
 });
