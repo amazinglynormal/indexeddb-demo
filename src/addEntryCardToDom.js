@@ -1,8 +1,7 @@
-import makeId from "./makeId";
+import { removeDataFromDB } from "./database";
 
-export default function addEntryCardToDom(data, parentNode) {
+export default function addEntryCardToDom(data, parentNode, id) {
   const article = document.createElement("article");
-  const id = makeId();
   article.setAttribute("id", id);
   article.setAttribute("class", "entry-card");
 
@@ -44,6 +43,7 @@ export default function addEntryCardToDom(data, parentNode) {
   deleteBtn.appendChild(deleteText);
   deleteBtn.addEventListener("click", () => {
     parentNode.removeChild(article);
+    removeDataFromDB(id);
   });
 
   divForBtn.appendChild(deleteBtn);

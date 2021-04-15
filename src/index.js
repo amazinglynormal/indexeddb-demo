@@ -1,44 +1,33 @@
 import addEntryCardToDom from "./addEntryCardToDom";
+import { addDataToDB, fetchDataFromDB, DB_NAME } from "./database";
+import makeId from "./makeId";
 import "./styles.css";
-const DB_NAME = "indexedDBDemo";
 
+// selectors
 const initializeDBBtn = document.querySelector(".initialize-db-btn");
 const deleteDBBtn = document.querySelector(".delete-db-btn");
 const form = document.querySelector("form");
 const entriesSection = document.getElementsByClassName("db-entries")[0];
-let dbExists = false;
-let db;
-let store;
 
 (async function () {
   const dbs = await indexedDB.databases();
   dbs.forEach((db) => {
-    if (db.name === DB_NAME) dbExists = true;
+    if (db.name === DB_NAME) {
+      initializeDBBtn.setAttribute("disabled", "");
+      fetchDataFromDB();
+    } else {
+      deleteDBBtn.setAttribute("disabled", "");
+    }
   });
 })();
 
-if (dbExists) {
-  initializeDBBtn.setAttribute("disabled", "");
-} else {
-  deleteDBBtn.setAttribute("disabled", "");
-}
-
-initializeDBBtn.addEventListener("click", () => {
-  const DBOpenRequest = indexedDB.open(DB_NAME);
-  initializeDBBtn.setAttribute("disabled", "");
-  deleteDBBtn.removeAttribute("disabled");
-
-  DBOpenRequest.onsuccess = function () {
-    db = DBOpenRequest.result;
-    store = db.createObjectStore("userStore");
-    store.createIndex("user", "user");
-    dbExists = true;
-  };
-});
+// initializeDBBtn.addEventListener("click", async () => {
+//   initializeDBBtn.setAttribute("disabled", "");
+//   deleteDBBtn.removeAttribute("disabled");
+// });
 
 deleteDBBtn.addEventListener("click", () => {
   indexedDB.deleteDatabase(DB_NAME);
-  dbExists = false;
   initializeDBBtn.removeAttribute("disabled");
   deleteDBBtn.setAttribute("disabled", "");
 });
@@ -56,13 +45,7 @@ form.addEventListener("formdata", (event) => {
     if (key === "languages") data[key] = fd.getAll(key);
     else data[key] = fd.get(key);
   }
-
-  // addDataToDB(data);
-  addEntryCardToDom(data, entriesSection);
+  const id = makeId();
+  addDataToDB(data, id);
+  addEntryCardToDom(data, entriesSection, id);
 });
-
-function addDataToDB(data) {
-  const transaction = db.transaction("userStore", "readwrite");
-  const userStore = transaction.objectStore("userStore");
-  userStore.add(data);
-}
