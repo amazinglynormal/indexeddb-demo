@@ -103,12 +103,11 @@ function addEntryCardToDom(data) {
   const deleteText = document.createTextNode("Delete");
   deleteBtn.appendChild(deleteText);
   deleteBtn.addEventListener("click", () => {
-    deleteBtn.parentNode.parentNode.parentNode.removeChild(id);
+    entriesSection.removeChild(article);
   });
 
   divForBtn.appendChild(deleteBtn);
   article.appendChild(divForBtn);
-  console.log(entriesSection);
 
   entriesSection.appendChild(article);
 }
