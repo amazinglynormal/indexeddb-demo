@@ -33,9 +33,16 @@ export const addDataToDB = (data, id) => {
     addData(data);
   };
 
+  openRequest.onerror = () => {
+    addNewTransaction("error", "Error opening database");
+  };
+
   const addData = (data) => {
     const transaction = db.transaction([STORE_NAME], "readwrite");
     transaction.oncomplete = transactionSuccessful;
+    transaction.onerror = () => {
+      addNewTransaction("error", transaction.error);
+    };
     const userStore = transaction.objectStore(STORE_NAME);
     const storeRequest = userStore.add(data, id);
     storeRequest.onsuccess = storeRequestSuccessful;
@@ -49,9 +56,16 @@ export const removeDataFromDB = (id) => {
     removeData(id);
   };
 
+  openRequest.onerror = () => {
+    addNewTransaction("error", "Error opening database");
+  };
+
   const removeData = (id) => {
     const transaction = db.transaction([STORE_NAME], "readwrite");
     transaction.oncomplete = transactionSuccessful;
+    transaction.onerror = () => {
+      addNewTransaction("error", transaction.error);
+    };
 
     const userStore = transaction.objectStore(STORE_NAME);
     const storeRequest = userStore.delete(id);
@@ -67,9 +81,16 @@ export const fetchDataFromDB = () => {
     fetchData();
   };
 
+  openRequest.onerror = () => {
+    addNewTransaction("error", "Error opening database");
+  };
+
   const fetchData = () => {
     const transaction = db.transaction([STORE_NAME], "readonly");
     transaction.oncomplete = transactionSuccessful;
+    transaction.onerror = () => {
+      addNewTransaction("error", transaction.error);
+    };
 
     const userStore = transaction.objectStore(STORE_NAME);
     const fetch = userStore.getAllKeys();
