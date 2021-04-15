@@ -1,4 +1,4 @@
-import addEntryCardToDom from "./addEntryCardToDom";
+import addNewEntryCard from "./addNewEntryCard";
 import { addDataToDB, fetchDataFromDB, DB_NAME } from "./database";
 import makeId from "./makeId";
 import "./styles.css";
@@ -9,6 +9,7 @@ const deleteDBBtn = document.querySelector(".delete-db-btn");
 const form = document.querySelector("form");
 const entriesSection = document.getElementsByClassName("db-entries")[0];
 
+// check for existing entries in database
 (async function () {
   const dbs = await indexedDB.databases();
   dbs.forEach((db) => {
@@ -26,6 +27,7 @@ const entriesSection = document.getElementsByClassName("db-entries")[0];
 //   deleteDBBtn.removeAttribute("disabled");
 // });
 
+// add listeners
 deleteDBBtn.addEventListener("click", () => {
   indexedDB.deleteDatabase(DB_NAME);
   initializeDBBtn.removeAttribute("disabled");
@@ -47,5 +49,5 @@ form.addEventListener("formdata", (event) => {
   }
   const id = makeId();
   addDataToDB(data, id);
-  addEntryCardToDom(data, entriesSection, id);
+  addNewEntryCard(data, entriesSection, id);
 });
