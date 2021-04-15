@@ -37,7 +37,7 @@ export default function addNewEntryCard(data, parentNode, id) {
   const deleteBtn = document.createElement("button");
 
   deleteBtn.setAttribute("type", "button");
-  deleteBtn.setAttribute("class", "delete-entry-btn");
+  deleteBtn.setAttribute("class", "delete-entry-btn btn");
   deleteBtn.setAttribute("id", `${id}-btn`);
   const deleteText = document.createTextNode("Delete");
   deleteBtn.appendChild(deleteText);
