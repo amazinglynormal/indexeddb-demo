@@ -42,8 +42,9 @@ export default function addNewEntryCard(data, parentNode, id) {
   const deleteText = document.createTextNode("Delete");
   deleteBtn.appendChild(deleteText);
   deleteBtn.addEventListener("click", () => {
+    const articleId = article.getAttribute("id");
+    removeDataFromDB(articleId);
     parentNode.removeChild(article);
-    removeDataFromDB(id);
   });
 
   divForBtn.appendChild(deleteBtn);
