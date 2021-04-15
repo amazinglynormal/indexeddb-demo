@@ -17,7 +17,13 @@ export default function addEntryCardToDom(data, parentNode) {
     const keyName = document.createTextNode(key);
     dt.appendChild(keyName);
 
-    const value = document.createTextNode(data[key]);
+    const isArray = Array.isArray(data[key]);
+    let value;
+    if (isArray) {
+      value = document.createTextNode(data[key].join(", "));
+    } else {
+      value = document.createTextNode(data[key]);
+    }
     dd.appendChild(value);
 
     div.appendChild(dt);
